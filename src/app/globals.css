@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* Cliniqo ERP brand, the same palette as the apps (tenant-app/src/app/globals.css). */
+@theme {
+  --color-*: initial;
+
+  --color-white: #ffffff;
+  --color-hospital-blue: #1a5276;
+  --color-sky-blue: #2e86c1;
+  --color-ice-blue: #d6eaf8;
+  --color-teal-green: #148f77;
+  --color-mint: #d5f5e3;
+  --color-amber: #d4a017;
+  --color-cream: #fef9e7;
+  --color-crimson: #c0392b;
+  --color-blush: #fadbd8;
+  --color-charcoal: #1c2833;
+  --color-slate: #5f6a6a;
+  --color-ash: #f2f3f4;
+  --color-border: #e2e8f0;
+  --color-deep: #002b46;
+  --color-darkest: #00121e;
+  --color-mist: #a9cce3;
+  --color-faint: #f8fbff;
+  --color-primary-hover: #154360;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-white);
+  color: var(--color-charcoal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
