@@ -1,28 +1,70 @@
+"use client";
+
 import { ArrowRight, Check } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, type FormEvent } from "react";
 
 const field =
   "mt-1.5 block w-full rounded-xl border border-border bg-faint/70 px-3.5 py-3 text-sm text-charcoal placeholder:text-slate/70 transition focus:border-sky-blue focus:bg-white focus:outline-none focus:ring-4 focus:ring-sky-blue/10";
 
 /**
- * Demo requests go to Netlify Forms (Site → Forms in Netlify). The form is plain HTML, so it works
- * without JavaScript; Netlify finds it in the built page by its data-netlify attribute.
+ * Demo requests go to Netlify Forms (Forms → demo in Netlify). Netlify detects the form from the static
+ * copy in public/__forms.html, and only accepts submissions posted to a static file, so this sends
+ * them there and then opens the thank-you page. Keep both forms' fields in step.
  */
 export function DemoForm() {
+  const router = useRouter();
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSending(true);
+    setFailed(false);
+    const data = new FormData(event.currentTarget);
+    try {
+      const response = await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+      });
+      if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+      router.push("/thanks/");
+    } catch {
+      setFailed(true);
+      setSending(false);
+    }
+  }
+
   return (
-    <section id="demo" className="demo-section relative isolate overflow-hidden bg-gradient-to-br from-deep to-hospital-blue">
-      <div aria-hidden="true" className="demo-glow pointer-events-none absolute -bottom-40 -left-24 size-[30rem] rounded-full bg-sky-blue/25 blur-3xl" />
+    <section
+      id="demo"
+      className="demo-section relative isolate overflow-hidden bg-gradient-to-br from-deep to-hospital-blue"
+    >
+      <div
+        aria-hidden="true"
+        className="demo-glow pointer-events-none absolute -bottom-40 -left-24 size-[30rem] rounded-full bg-sky-blue/25 blur-3xl"
+      />
       <div className="relative mx-auto grid max-w-6xl items-start gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:py-24">
         <div className="text-white">
-          <p className="inline-flex items-center gap-2 text-sm font-semibold text-mist"><span className="size-1.5 rounded-full bg-teal-green" /> Book a demo</p>
+          <p className="inline-flex items-center gap-2 text-sm font-semibold text-mist">
+            <span className="size-1.5 rounded-full bg-teal-green" /> Book a demo
+          </p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight">See Cliniqo ERP with your own workflow</h2>
           <p className="mt-4 leading-relaxed text-mist">
             Tell us about your hospital. We&apos;ll walk you through a patient&apos;s visit from check-in to billing,
             and answer your questions about setup, your records and pricing.
           </p>
           <ul className="mt-8 space-y-4 text-sm text-mist">
-            {["Walk through a patient visit", "Compare cloud and on-premise setup", "Discuss your existing records"].map((item) => (
+            {[
+              "Walk through a patient visit",
+              "Compare cloud and on-premise setup",
+              "Discuss your existing records",
+            ].map((item) => (
               <li key={item} className="flex items-center gap-3">
-                <span className="grid size-6 place-items-center rounded-full bg-teal-green/20 text-[#63d7b3]"><Check className="size-3.5" /></span>
+                <span className="grid size-6 place-items-center rounded-full bg-teal-green/20 text-[#63d7b3]">
+                  <Check className="size-3.5" />
+                </span>
                 {item}
               </li>
             ))}
@@ -31,9 +73,7 @@ export function DemoForm() {
         <form
           name="demo"
           method="POST"
-          action="/thanks/"
-          data-netlify="true"
-          netlify-honeypot="company-website"
+          onSubmit={submit}
           className="demo-form grid gap-4 rounded-2xl border border-white/50 bg-white p-6 shadow-2xl shadow-darkest/20 sm:grid-cols-2 sm:p-8"
         >
           <div className="sm:col-span-2">
@@ -85,11 +125,18 @@ export function DemoForm() {
             Anything we should know?
             <textarea name="message" rows={3} className={field} />
           </label>
+          {failed && (
+            <p role="alert" className="rounded-xl bg-blush px-4 py-3 text-sm text-[#922b21] sm:col-span-2">
+              Your request didn&apos;t send. Check your connection and try again.
+            </p>
+          )}
           <button
             type="submit"
-            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-hospital-blue px-5 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-blue sm:col-span-2"
+            disabled={sending}
+            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-hospital-blue px-5 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-blue disabled:opacity-70 sm:col-span-2"
           >
-            Request a demo <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+            {sending ? "Sending…" : "Request a demo"}
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </button>
         </form>
       </div>

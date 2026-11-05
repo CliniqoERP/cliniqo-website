@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Forms</title>
+  </head>
+  <body>
+    <!--
+      Netlify detects forms in static HTML at deploy time and accepts submissions posted to a static
+      file. The real form is src/components/demo-form.tsx; keep these fields the same as its.
+    -->
+    <form name="demo" data-netlify="true" netlify-honeypot="company-website" hidden>
+      <input type="hidden" name="form-name" value="demo" />
+      <input name="company-website" />
+      <input name="name" />
+      <input name="role" />
+      <input name="hospital" />
+      <input name="email" type="email" />
+      <input name="phone" type="tel" />
+      <select name="staff">
+        <option>Up to 10</option>
+        <option>11 to 50</option>
+        <option>More than 50</option>
+      </select>
+      <input name="state" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>
