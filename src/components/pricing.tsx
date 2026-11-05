@@ -13,10 +13,12 @@ export function Pricing() {
     <section id="pricing" className="pricing-section border-y border-border bg-faint">
       <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="inline-flex items-center gap-2 text-sm font-semibold text-sky-blue"><span className="size-1.5 rounded-full bg-teal-green" /> Pricing</p>
+          <p className="inline-flex items-center gap-2 text-sm font-semibold text-sky-blue">
+            <span className="size-1.5 rounded-full bg-teal-green" /> Pricing
+          </p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight">One price for the whole hospital</h2>
           <p className="mt-3 text-slate">
-            Priced per hospital, not per patient. The same in the cloud or on your own servers.
+            Priced per hospital, not per patient. The same plans in the cloud or on your own servers.
           </p>
           <div
             role="radiogroup"
@@ -35,7 +37,11 @@ export function Pricing() {
                 }`}
               >
                 {option === "monthly" ? "Monthly" : "Annual"}
-                {option === "annual" && cycle === "annual" && <span className="ml-2 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">Billed yearly</span>}
+                {option === "annual" && cycle === "annual" && (
+                  <span className="ml-2 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">
+                    Billed yearly
+                  </span>
+                )}
               </button>
             ))}
           </div>
@@ -83,7 +89,7 @@ export function Pricing() {
                 </ul>
                 <a
                   href="#demo"
-                    className={`mt-8 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-center text-sm font-semibold transition-colors ${
+                  className={`mt-8 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-center text-sm font-semibold transition-colors ${
                     plan.highlight
                       ? "bg-hospital-blue text-white hover:bg-primary-hover"
                       : "border border-border text-hospital-blue hover:bg-faint"
@@ -95,6 +101,13 @@ export function Pricing() {
             );
           })}
         </div>
+        <p className="mt-8 text-center text-sm text-slate">
+          Running Cliniqo on your own servers? On-premise installs add a one-off installation fee, quoted for your
+          hospital.{" "}
+          <a href="#demo" className="font-medium text-hospital-blue underline-offset-4 hover:underline">
+            Ask us for a quote
+          </a>
+        </p>
       </div>
     </section>
   );
