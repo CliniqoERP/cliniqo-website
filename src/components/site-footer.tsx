@@ -33,9 +33,10 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="border-t border-white/10">
-        <p className="mx-auto max-w-6xl px-4 py-5 text-xs sm:px-6">
-          © {new Date().getFullYear()} Cliniqo. All rights reserved.
-        </p>
+        <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 text-xs sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <p>© {new Date().getFullYear()} Cliniqo. All rights reserved.</p>
+          <p className="text-mist/75">Powered by <span className="font-semibold text-white">Chan-Tech</span></p>
+        </div>
       </div>
     </footer>
   );

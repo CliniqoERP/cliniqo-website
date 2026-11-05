@@ -29,15 +29,17 @@ const QUESTIONS = [
 
 export function Faq() {
   return (
-    <section id="faq" className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-      <p className="text-sm font-semibold text-sky-blue">FAQ</p>
+    <section id="faq" className="faq-section mx-auto max-w-3xl px-4 py-20 sm:px-6 lg:py-24">
+      <p className="inline-flex items-center gap-2 text-sm font-semibold text-sky-blue"><span className="size-1.5 rounded-full bg-teal-green" /> FAQ</p>
       <h2 className="mt-2 text-3xl font-semibold tracking-tight">Questions hospitals ask us</h2>
-      <div className="mt-8 divide-y divide-border rounded-2xl border border-border">
+      <div className="faq-list mt-8 divide-y divide-border rounded-2xl border border-border bg-white shadow-sm">
         {QUESTIONS.map(({ q, a }) => (
-          <details key={q} className="group px-5 py-4 [&_summary::-webkit-details-marker]:hidden">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium">
-              {q}
-              <ChevronDown className="size-4 shrink-0 text-slate transition-transform group-open:rotate-180" />
+          <details key={q} className="faq-item group px-5 py-4 sm:px-6">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium marker:hidden [&::-webkit-details-marker]:hidden">
+              <span className="transition-colors group-open:text-hospital-blue">{q}</span>
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-faint text-slate transition-all group-open:rotate-180 group-open:bg-ice-blue group-open:text-hospital-blue">
+                <ChevronDown className="size-4" />
+              </span>
             </summary>
             <p className="mt-3 text-sm leading-relaxed text-slate">{a}</p>
           </details>

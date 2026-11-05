@@ -1,6 +1,6 @@
 "use client";
 
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { useState } from "react";
 import { naira, PLANS } from "@/content/plans";
 
@@ -10,10 +10,10 @@ export function Pricing() {
   const [cycle, setCycle] = useState<Cycle>("annual");
 
   return (
-    <section id="pricing" className="border-y border-border bg-faint">
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <section id="pricing" className="pricing-section border-y border-border bg-faint">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold text-sky-blue">Pricing</p>
+          <p className="inline-flex items-center gap-2 text-sm font-semibold text-sky-blue"><span className="size-1.5 rounded-full bg-teal-green" /> Pricing</p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight">One price for the whole hospital</h2>
           <p className="mt-3 text-slate">
             Priced per hospital, not per patient. The same in the cloud or on your own servers.
@@ -21,7 +21,7 @@ export function Pricing() {
           <div
             role="radiogroup"
             aria-label="Billing cycle"
-            className="mt-8 inline-flex rounded-lg border border-border bg-white p-1"
+            className="billing-toggle mt-8 inline-flex rounded-xl border border-border bg-white p-1 shadow-sm"
           >
             {(["monthly", "annual"] as const).map((option) => (
               <button
@@ -30,11 +30,12 @@ export function Pricing() {
                 role="radio"
                 aria-checked={cycle === option}
                 onClick={() => setCycle(option)}
-                className={`rounded-md px-4 py-2 text-sm font-medium transition-colors ${
+                className={`relative rounded-lg px-5 py-2.5 text-sm font-medium transition-all ${
                   cycle === option ? "bg-hospital-blue text-white shadow-sm" : "text-slate hover:text-charcoal"
                 }`}
               >
                 {option === "monthly" ? "Monthly" : "Annual"}
+                {option === "annual" && cycle === "annual" && <span className="ml-2 rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">Billed yearly</span>}
               </button>
             ))}
           </div>
@@ -47,24 +48,27 @@ export function Pricing() {
             return (
               <article
                 key={plan.name}
-                className={`relative flex flex-col rounded-2xl bg-white p-6 ${
+                className={`pricing-card lift-card relative flex flex-col rounded-2xl bg-white p-6 sm:p-7 ${
                   plan.highlight
                     ? "border-2 border-hospital-blue shadow-xl shadow-hospital-blue/10"
                     : "border border-border"
                 }`}
               >
                 {plan.highlight && (
-                  <p className="absolute -top-3 left-6 rounded-full bg-hospital-blue px-3 py-1 text-xs font-semibold text-white">
+                  <p className="absolute -top-3 left-6 rounded-full bg-hospital-blue px-3 py-1 text-xs font-semibold text-white shadow-sm">
                     For most hospitals
                   </p>
                 )}
-                <h3 className="text-lg font-semibold">{plan.name}</h3>
+                <div className="flex items-center justify-between gap-3">
+                  <h3 className="text-lg font-semibold">{plan.name}</h3>
+                  <span className="size-2 rounded-full bg-teal-green/70" />
+                </div>
                 <p className="mt-1 min-h-10 text-sm text-slate">{plan.summary}</p>
-                <p className="mt-6 flex items-baseline gap-1">
+                <p key={`${plan.name}-${cycle}`} className="price-change mt-6 flex items-baseline gap-1">
                   <span className="text-3xl font-semibold tracking-tight">{naira(price)}</span>
                   <span className="text-sm text-slate">/ {cycle === "annual" ? "year" : "month"}</span>
                 </p>
-                <p className="mt-1 h-5 text-sm font-medium text-teal-green">
+                <p className="mt-1 min-h-5 text-sm font-medium text-teal-green">
                   {cycle === "annual" && saving > 0 ? `Save ${naira(saving)} a year` : ""}
                 </p>
                 <p className="mt-4 rounded-lg bg-ash px-3 py-2 text-sm font-medium">{plan.users}</p>
@@ -79,13 +83,13 @@ export function Pricing() {
                 </ul>
                 <a
                   href="#demo"
-                  className={`mt-8 rounded-lg px-4 py-2.5 text-center text-sm font-semibold transition-colors ${
+                    className={`mt-8 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-center text-sm font-semibold transition-colors ${
                     plan.highlight
                       ? "bg-hospital-blue text-white hover:bg-primary-hover"
                       : "border border-border text-hospital-blue hover:bg-faint"
                   }`}
                 >
-                  Book a demo
+                  Book a demo <ArrowRight className="size-4" />
                 </a>
               </article>
             );

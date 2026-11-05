@@ -1,4 +1,4 @@
-import { ClipboardList, CreditCard, FlaskConical, HeartPulse, Pill, Stethoscope } from "lucide-react";
+import { ArrowRight, ClipboardList, CreditCard, FlaskConical, HeartPulse, Pill, Stethoscope } from "lucide-react";
 
 const STEPS = [
   { title: "Check-in", text: "Register or find the patient; a visit opens.", icon: ClipboardList },
@@ -11,10 +11,10 @@ const STEPS = [
 
 export function Journey() {
   return (
-    <section className="border-b border-border bg-faint">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <section className="journey-section border-b border-border bg-faint">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold text-sky-blue">One visit, every department</p>
+          <p className="inline-flex items-center gap-2 text-sm font-semibold text-sky-blue"><span className="size-1.5 rounded-full bg-teal-green" /> One visit, every department</p>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight text-charcoal">
             The patient moves. The paperwork doesn&apos;t.
           </h2>
@@ -23,17 +23,18 @@ export function Journey() {
             something changes.
           </p>
         </div>
-        <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
+        <ol aria-label="A patient's visit through the hospital" className="journey-steps relative mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {STEPS.map(({ title, text, icon: Icon }, index) => (
-            <li key={title} className="relative rounded-xl border border-border bg-white p-4">
+            <li key={title} className="journey-step lift-card relative rounded-2xl border border-border bg-white p-5">
               <div className="flex items-center gap-2">
-                <span className="grid size-8 place-items-center rounded-lg bg-ice-blue text-hospital-blue">
+                <span className="journey-icon grid size-10 place-items-center rounded-xl bg-ice-blue text-hospital-blue">
                   <Icon className="size-4" />
                 </span>
-                <span className="text-xs font-semibold text-slate">0{index + 1}</span>
+                <span className="ml-auto font-mono text-[11px] font-semibold tracking-wider text-sky-blue/70">0{index + 1}</span>
               </div>
               <h3 className="mt-3 font-semibold text-charcoal">{title}</h3>
               <p className="mt-1 text-sm leading-relaxed text-slate">{text}</p>
+              {index < STEPS.length - 1 && <ArrowRight aria-hidden="true" className="journey-next hidden size-4 text-sky-blue/60 lg:block" />}
             </li>
           ))}
         </ol>

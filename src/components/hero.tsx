@@ -8,10 +8,10 @@ export function Hero() {
     <section className="relative overflow-hidden bg-gradient-to-b from-darkest via-deep to-hospital-blue text-white">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-40 right-[-10%] size-[36rem] rounded-full bg-sky-blue/25 blur-3xl"
+        className="animate-glow-drift pointer-events-none absolute -top-40 right-[-10%] size-[36rem] rounded-full bg-sky-blue/25 blur-3xl"
       />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 md:py-24 lg:grid-cols-[1.05fr_1fr]">
-        <div>
+        <div className="hero-copy">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-mist">
             Hospital management software for Nigeria
           </p>
