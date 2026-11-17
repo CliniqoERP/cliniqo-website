@@ -40,8 +40,10 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 text-xs sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>© {new Date().getFullYear()} ChanielTech Limited. All rights reserved.</p>
-          <p className="text-mist/75">Powered by <span className="font-semibold text-white">ChanielTech</span></p>
+          <p>
+            © {new Date().getFullYear()} ChanielTech Limited. All rights
+            reserved.
+          </p>
         </div>
       </div>
     </footer>
