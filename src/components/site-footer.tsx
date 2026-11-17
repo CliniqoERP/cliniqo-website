@@ -30,12 +30,20 @@ export function SiteFooter() {
           <Link href="/#demo" className="hover:text-white">
             Book a demo
           </Link>
+          <Link href="/privacy" className="hover:text-white">
+            Privacy Policy
+          </Link>
+          <Link href="/terms" className="hover:text-white">
+            Terms of Use
+          </Link>
         </nav>
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-5 text-xs sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <p>© {new Date().getFullYear()} Cliniqo. All rights reserved.</p>
-          <p className="text-mist/75">Powered by <span className="font-semibold text-white">Chan-Tech</span></p>
+          <p>
+            © {new Date().getFullYear()} ChanielTech Limited. All rights
+            reserved.
+          </p>
         </div>
       </div>
     </footer>
