@@ -14,7 +14,8 @@ yarn lint && npx next typegen && yarn typecheck
 | Path | What |
 | --- | --- |
 | `src/app/page.tsx` | The home page: one section per component in `src/components/`. |
-| `src/content/plans.ts` | Prices and what each plan includes. Copied from the backend (`shared/plans/plans.ts`, `settings-modules.ts`); update it when those change. |
+| `src/content/plans.ts` | What each plan includes (from the backend's `settings-modules.ts`), and fallback prices shown until the live ones load. |
+| `src/content/live-prices.ts` | Loads the live prices, edited in the admin app, from `NEXT_PUBLIC_PRICES_URL` (default `https://admin.cliniqoerp.com/api/public/plans`). |
 | `src/components/demo-form.tsx` | The "Book a demo" form, handled by Netlify Forms. It posts to `public/__forms.html`, the static copy Netlify detects; keep their fields the same. |
 | `src/app/thanks/` | Where the form lands after sending. |
 | `netlify.toml` | Build settings and security headers. |
