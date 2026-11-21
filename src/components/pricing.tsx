@@ -2,12 +2,14 @@
 
 import { ArrowRight, Check } from "lucide-react";
 import { useState } from "react";
-import { naira, PLANS } from "@/content/plans";
+import { useLivePlans } from "@/content/live-prices";
+import { naira, staffAccounts } from "@/content/plans";
 
 type Cycle = "monthly" | "annual";
 
 export function Pricing() {
   const [cycle, setCycle] = useState<Cycle>("annual");
+  const plans = useLivePlans();
 
   return (
     <section id="pricing" className="pricing-section border-y border-border bg-faint">
@@ -48,12 +50,12 @@ export function Pricing() {
         </div>
 
         <div className="mt-10 grid gap-5 lg:grid-cols-3">
-          {PLANS.map((plan) => {
+          {plans.map((plan) => {
             const price = cycle === "annual" ? plan.annual : plan.monthly;
             const saving = plan.monthly * 12 - plan.annual;
             return (
               <article
-                key={plan.name}
+                key={plan.key}
                 className={`pricing-card lift-card relative flex flex-col rounded-2xl bg-white p-6 sm:p-7 ${
                   plan.highlight
                     ? "border-2 border-hospital-blue shadow-xl shadow-hospital-blue/10"
@@ -77,7 +79,7 @@ export function Pricing() {
                 <p className="mt-1 min-h-5 text-sm font-medium text-teal-green">
                   {cycle === "annual" && saving > 0 ? `Save ${naira(saving)} a year` : ""}
                 </p>
-                <p className="mt-4 rounded-lg bg-ash px-3 py-2 text-sm font-medium">{plan.users}</p>
+                <p className="mt-4 rounded-lg bg-ash px-3 py-2 text-sm font-medium">{staffAccounts(plan.maxUsers)}</p>
                 <p className="mt-6 text-sm font-semibold">{plan.intro}</p>
                 <ul className="mt-3 flex-1 space-y-2.5 text-sm text-slate">
                   {plan.features.map((feature) => (

@@ -1,13 +1,17 @@
 /**
- * Prices and plan contents. The backend decides them (backend/src/shared/plans/plans.ts and
- * settings-modules.ts); keep this in step when they change.
+ * Plan contents, with the prices and staff limits they had when the site was built. The live prices
+ * are edited in the admin app and loaded when the page opens (live-prices.ts); these show until then,
+ * or if they can't be loaded. What each plan includes follows backend/src/shared/plans/settings-modules.ts.
  */
+export type PlanKey = "STANDARD" | "PROFESSIONAL" | "ENTERPRISE";
 export type Plan = {
+  key: PlanKey;
   name: string;
   summary: string;
   monthly: number;
   annual: number;
-  users: string;
+  /** Null means unlimited. */
+  maxUsers: number | null;
   intro: string;
   features: string[];
   highlight?: boolean;
@@ -15,11 +19,12 @@ export type Plan = {
 
 export const PLANS: Plan[] = [
   {
+    key: "STANDARD",
     name: "Standard",
     summary: "The full patient journey for a clinic or small hospital.",
     monthly: 150_000,
     annual: 1_500_000,
-    users: "Up to 10 staff accounts",
+    maxUsers: 10,
     intro: "Includes",
     features: [
       "Reception, walk-in check-in and patient records",
@@ -33,11 +38,12 @@ export const PLANS: Plan[] = [
     ],
   },
   {
+    key: "PROFESSIONAL",
     name: "Professional",
     summary: "For hospitals that bill HMOs and run a full staff.",
     monthly: 300_000,
     annual: 3_300_000,
-    users: "Up to 50 staff accounts",
+    maxUsers: 50,
     intro: "Everything in Standard, plus",
     features: [
       "HMO management and claims",
@@ -51,11 +57,12 @@ export const PLANS: Plan[] = [
     highlight: true,
   },
   {
+    key: "ENTERPRISE",
     name: "Enterprise",
     summary: "For large and multi-department hospitals.",
     monthly: 500_000,
     annual: 5_500_000,
-    users: "Unlimited staff accounts",
+    maxUsers: null,
     intro: "Everything in Professional, plus",
     features: [
       "Reports and analytics: clinical, financial and lab",
@@ -68,3 +75,6 @@ export const PLANS: Plan[] = [
 ];
 
 export const naira = (amount: number) => `₦${amount.toLocaleString("en-NG")}`;
+
+export const staffAccounts = (maxUsers: number | null) =>
+  maxUsers === null ? "Unlimited staff accounts" : `Up to ${maxUsers.toLocaleString("en-NG")} staff accounts`;
