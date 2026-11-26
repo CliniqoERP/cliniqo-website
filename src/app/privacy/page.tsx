@@ -19,6 +19,7 @@ export default function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
+      effective={LEGAL.privacyEffective}
       intro={
         <p>
           This policy explains what personal data Cliniqo ERP handles, why, who

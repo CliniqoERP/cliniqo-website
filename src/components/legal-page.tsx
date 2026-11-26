@@ -4,7 +4,18 @@ import { LEGAL } from "@/content/legal";
 import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 
-export function LegalPage({ title, intro, children }: { title: string; intro: ReactNode; children: ReactNode }) {
+export function LegalPage({
+  title,
+  effective,
+  intro,
+  children,
+}: {
+  title: string;
+  /** This document's own effective date (e.g. LEGAL.privacyEffective). */
+  effective: string;
+  intro: ReactNode;
+  children: ReactNode;
+}) {
   return (
     <>
       <SiteHeader />
@@ -12,7 +23,7 @@ export function LegalPage({ title, intro, children }: { title: string; intro: Re
         <article className="mx-auto max-w-3xl rounded-3xl border border-border bg-white px-5 py-10 shadow-sm sm:px-12 sm:py-14">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{title}</h1>
           <p className="mt-3 text-sm text-slate">
-            Version {LEGAL.version} · Effective {LEGAL.effective}
+            Version {LEGAL.version} · Effective {effective}
           </p>
           <div className="mt-6 space-y-4 leading-relaxed text-charcoal">{intro}</div>
           <div className="mt-4">{children}</div>
