@@ -19,6 +19,7 @@ export default function PrivacyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
+      effective={LEGAL.privacyEffective}
       intro={
         <p>
           This policy explains what personal data Cliniqo ERP handles, why, who
@@ -264,8 +265,13 @@ export default function PrivacyPage() {
             ],
             ["Mailgun", "Sending emails", "United States"],
             [
-              "Squad (by GTCO)",
+              "Monnify (by Moniepoint)",
               "Confirming bank account names for payroll",
+              "Nigeria",
+            ],
+            [
+              "Squad (by GTCO)",
+              "Confirming bank account names for payroll (backup provider)",
               "Nigeria",
             ],
           ]}

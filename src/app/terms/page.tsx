@@ -11,6 +11,7 @@ export default function TermsPage() {
   return (
     <LegalPage
       title="Terms of Use"
+      effective={LEGAL.termsEffective}
       intro={
         <>
           <p>
