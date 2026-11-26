@@ -264,8 +264,13 @@ export default function PrivacyPage() {
             ],
             ["Mailgun", "Sending emails", "United States"],
             [
-              "Squad (by GTCO)",
+              "Monnify (by Moniepoint)",
               "Confirming bank account names for payroll",
+              "Nigeria",
+            ],
+            [
+              "Squad (by GTCO)",
+              "Confirming bank account names for payroll (backup provider)",
               "Nigeria",
             ],
           ]}

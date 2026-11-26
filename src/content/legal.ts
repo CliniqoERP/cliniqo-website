@@ -7,6 +7,6 @@ export const LEGAL = {
   rcNumber: "10015065",
   address: "16b Monilola Oyeyinka Street, Ajao Estate, Lagos, Nigeria",
   email: "support@cliniqoerp.com",
-  version: "2026-11-14",
-  effective: "17 November 2026",
+  version: "2026-11-26",
+  effective: "26 November 2026",
 };
