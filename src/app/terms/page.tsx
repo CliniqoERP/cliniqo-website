@@ -115,6 +115,13 @@ export default function TermsPage() {
             "Fees are paid in advance, monthly or yearly. They are not refundable for a period already started, except where the law requires or we agree in writing.",
             "We may change prices for future periods. We will give at least 30 days’ notice before a change applies to the Hospital’s next renewal.",
             "If a renewal is not paid by its due date, the Hospital’s access may be suspended. Suspension stops staff signing in; it does not delete any data. Access returns once payment is made.",
+            <>
+              <strong>Hospital groups and branches.</strong> A group account’s plan sets how many active
+              branches it may run. If the group changes to a plan that allows fewer branches, the group has
+              30 days to choose which branches stay active. After that, branches over the limit are
+              suspended — staff can’t sign in, but no data is deleted, and a suspended branch is restored by
+              upgrading the plan or reactivating it in place of another.
+            </>,
           ]}
         />
       </Section>
